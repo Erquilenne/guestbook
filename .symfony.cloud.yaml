@@ -15,7 +15,7 @@ runtime:
 build:
     flavor: none
 
-relations:
+relationship:
     database: "db:postgresql"
 
 web:
