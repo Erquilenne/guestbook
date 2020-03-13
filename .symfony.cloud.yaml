@@ -9,10 +9,14 @@ runtime:
         - sodium
         - ctype
         - iconv
+        - pdo_pgsql
         
 
 build:
     flavor: none
+
+relations:
+    database: "db:postgresql"
 
 web:
     locations:
