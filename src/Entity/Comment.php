@@ -52,6 +52,11 @@ class Comment
         return $this->id;
     }
 
+    public function __toString(): string
+    {
+        return (string) $this->getEmail();
+    }
+
     public function getAuthor(): ?string
     {
         return $this->author;
