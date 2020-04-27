@@ -247,6 +247,12 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.0.7"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v2.0.1"
+    },
     "symfony/http-foundation": {
         "version": "v5.0.5"
     },
@@ -294,11 +300,17 @@
     "symfony/orm-pack": {
         "version": "v1.0.8"
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.15.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.14.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.14.0"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.15.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.14.0"
@@ -355,6 +367,9 @@
     },
     "symfony/stopwatch": {
         "version": "v5.0.5"
+    },
+    "symfony/string": {
+        "version": "v5.0.7"
     },
     "symfony/translation": {
         "version": "3.3",
@@ -424,6 +439,9 @@
     },
     "symfony/yaml": {
         "version": "v5.0.5"
+    },
+    "twig/intl-extra": {
+        "version": "v3.0.3"
     },
     "twig/twig": {
         "version": "v3.0.3"
