@@ -4,6 +4,8 @@
 namespace App\Tests\Controller;
 
 
+use App\Repository\CommentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Panther\PantherTestCase;
 
 class ConferenceControllerTest extends PantherTestCase
@@ -24,10 +26,16 @@ class ConferenceControllerTest extends PantherTestCase
         $client->submitForm('Submit', [
             'comment_form[author]' => 'Petruccio',
             'comment_form[text]' => 'test feedback from automated fucntional test',
-            'comment_form[email]' => 'me@automat.te',
+            'comment_form[email]' => $email = 'me@automat.te',
             'comment_form[photo]' => dirname(__DIR__, 2).'/public/images/under-construction.gif',
         ]);
         $this->assertResponseRedirects();
+
+        //simulate comment validation
+        $comment = self::$container->get(CommentRepository::class)->findByEmail($email);
+        $comment->setState('published');
+        self::$container->get(EntityManagerInterface::class)->flush();
+
         $client->followRedirect();
         $this->assertSelectorExists('div:contains("There are 2 comments")');
     }

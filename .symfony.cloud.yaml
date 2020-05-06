@@ -11,6 +11,7 @@ runtime:
         - iconv
         - pdo_pgsql
         - redis
+        - amqp
         
 
 build:
@@ -19,6 +20,7 @@ build:
 relationships:
     database: "db:postgresql"
     redis: "rediscache:redis"
+    rabbitmq: "queue:rabbitmq"
 
 web:
     locations:
@@ -44,3 +46,12 @@ hooks:
         set -x -e
 
         (>&2 symfony-deploy)
+
+workers:
+    messages:
+        commands:
+            start: |
+                set -x -e
+
+                (>&2 symfony-deploy)
+                php bin/console messenger:consume async -vv --time-limit 3600 --memory-limit=128M
