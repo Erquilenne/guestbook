@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -33,4 +35,21 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+    /**
+     * @Route("/sendmail", name="send_mail")
+     */
+    public function sendMail(MailerInterface $mailer)
+    {
+        $email = (new Email())
+            ->from('admin@admin.admin')
+            ->to('admin@admin.admin')
+            ->subject('Welcome to the Space Bar!')
+            ->text("Nice to meet you pidor! ❤️");
+
+        $mailer->send($email);
+        return $this->render('base.html.twig', []);
+    }
+
+
 }

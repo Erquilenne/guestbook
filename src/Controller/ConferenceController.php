@@ -8,8 +8,8 @@ use App\Form\CommentFormType;
 use App\Message\CommentMessage;
 use App\Repository\CommentRepository;
 use App\Repository\ConferenceRepository;
-use App\SpamChecker;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,13 +27,18 @@ class ConferenceController extends AbstractController
      * @var MessageBusInterface
      */
     private $bus;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
-    public function __construct(Environment $twig, EntityManagerInterface $entityManager, MessageBusInterface $bus)
+    public function __construct(Environment $twig, EntityManagerInterface $entityManager, MessageBusInterface $bus, LoggerInterface $logger)
     {
         $twig->addExtension(new IntlExtension());
         $this->twig = $twig;
         $this->entityManager = $entityManager;
         $this->bus = $bus;
+        $this->logger = $logger;
     }
 
     /**
@@ -67,6 +72,9 @@ class ConferenceController extends AbstractController
             }
 
             $this->entityManager->persist($comment);
+            $this->entityManager->flush();
+            $this->logger->info('flush is done');
+
 
             $context = [
                 'user_ip' => $request->getClientIp(),
@@ -75,6 +83,8 @@ class ConferenceController extends AbstractController
                 'permalink' => $request->getUri(),
             ];
             $this->bus->dispatch(new CommentMessage($comment->getId(), $context));
+
+            $this->logger->info('dispatch is done');
 
             return $this->redirectToRoute('conference', ['slug' => $conference->getSlug()]);
         }
