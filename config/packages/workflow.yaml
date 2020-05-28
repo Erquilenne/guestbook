@@ -20,22 +20,22 @@ framework:
             transitions:
                 accept:
                     from: submitted
-                    to: ham
+                    to:   ham
                 might_be_spam:
                     from: submitted
-                    to: potential_spam
+                    to:   potential_spam
                 reject_spam:
                     from: submitted
-                    to: spam
+                    to:   spam
                 publish:
                     from: potential_spam
-                    to: published
+                    to:   published
                 reject:
                     from: potential_spam
-                    to: rejected
+                    to:   rejected
                 publish_ham:
                     from: ham
-                    to: published
+                    to:   published
                 reject_ham:
                     from: ham
-                    to: rejected
+                    to:   rejected
