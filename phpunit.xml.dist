@@ -5,7 +5,7 @@
          xsi:noNamespaceSchemaLocation="bin/.phpunit/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="config/bootstrap.php"
 >
     <php>
         <ini name="error_reporting" value="-1" />
@@ -22,10 +22,14 @@
     </testsuites>
 
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
+        <whitelist>
+            <directory>src</directory>
         </whitelist>
     </filter>
+
+    <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
+    </extensions>
 
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />

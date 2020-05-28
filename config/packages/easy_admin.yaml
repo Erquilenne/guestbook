@@ -1,13 +1,13 @@
 easy_admin:
-    site_name: Conference guestbook
+    site_name: Conference Guestbook
 
     design:
         menu:
             - { route: 'homepage', label: 'Back to the website', icon: 'home' }
             - { entity: 'Conference', label: 'Conferences', icon: 'map-marker' }
             - { entity: 'Comment', label: 'Comments', icon: 'comments' }
+
     entities:
-        # List the entity class name you want to manage
         Conference:
             class: App\Entity\Conference
 
@@ -28,6 +28,5 @@ easy_admin:
                     - { property: 'createdAt', type: datetime, type_options: { attr: { readonly: true } } }
                     - 'author'
                     - { property: 'state' }
-                    - {property: 'email', type: 'email'}
+                    - { property: 'email', type: 'email' }
                     - text
-#        - App\Entity\User

@@ -18,17 +18,20 @@ class SpamCheckerTest extends TestCase
         $context = [];
 
         $client = new MockHttpClient([new MockResponse('invalid', ['response_headers' => ['x-akismet-debug-help: Invalid key']])]);
-        $checker = new SpamChecker($client, 'abvde');
+        $checker = new SpamChecker($client, 'abcde');
 
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Unable to check for spam: invalid (Invalid key)');
+        $this->expectExceptionMessage('Unable to check for spam: invalid (Invalid key).');
         $checker->getSpamScore($comment, $context);
     }
 
+    /**
+     * @dataProvider getComments
+     */
     public function testSpamScore(int $expectedScore, ResponseInterface $response, Comment $comment, array $context)
     {
         $client = new MockHttpClient([$response]);
-        $checker = new SpamChecker($client, 'ancde');
+        $checker = new SpamChecker($client, 'abcde');
 
         $score = $checker->getSpamScore($comment, $context);
         $this->assertSame($expectedScore, $score);

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Message;
-
 
 class CommentMessage
 {
@@ -15,17 +13,11 @@ class CommentMessage
         $this->context = $context;
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return array
-     */
     public function getContext(): array
     {
         return $this->context;

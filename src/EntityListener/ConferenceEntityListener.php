@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\EntityListener;
-
 
 use App\Entity\Conference;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -17,12 +15,12 @@ class ConferenceEntityListener
         $this->slugger = $slugger;
     }
 
-    public function prePersist(Conference $conference)
+    public function prePersist(Conference $conference, LifecycleEventArgs $event)
     {
         $conference->computeSlug($this->slugger);
     }
 
-    public function preUpdate(Conference $conference)
+    public function preUpdate(Conference $conference, LifecycleEventArgs $event)
     {
         $conference->computeSlug($this->slugger);
     }

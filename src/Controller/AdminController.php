@@ -15,17 +15,8 @@ use Twig\Environment;
 
 class AdminController extends AbstractController
 {
-    /**
-     * @var Environment
-     */
     private $twig;
-    /**
-     * @var EntityManagerInterface
-     */
     private $entityManager;
-    /**
-     * @var MessageBusInterface
-     */
     private $bus;
 
     public function __construct(Environment $twig, EntityManagerInterface $entityManager, MessageBusInterface $bus)
@@ -43,8 +34,8 @@ class AdminController extends AbstractController
         $accepted = !$request->query->get('reject');
 
         $machine = $registry->get($comment);
-        if($machine->can($comment, 'publish')) {
-            $transition = $accepted ? 'published' : 'rejected';
+        if ($machine->can($comment, 'publish')) {
+            $transition = $accepted ? 'publish' : 'reject';
         } elseif ($machine->can($comment, 'publish_ham')) {
             $transition = $accepted ? 'publish_ham' : 'reject_ham';
         } else {
@@ -59,8 +50,8 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/review.html.twig', [
-        'transition' => $transition,
-        'comment' => $comment,
-    ]);
+            'transition' => $transition,
+            'comment' => $comment,
+        ]);
     }
 }

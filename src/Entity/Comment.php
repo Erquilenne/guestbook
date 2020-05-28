@@ -20,20 +20,20 @@ class Comment
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
      */
     private $author;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
      */
     private $text;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 
@@ -58,14 +58,14 @@ class Comment
      */
     private $state = 'submitted';
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function __toString(): string
     {
         return (string) $this->getEmail();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getAuthor(): ?string
@@ -117,7 +117,7 @@ class Comment
     }
 
     /**
-     * @ORM\PrePersist()
+     * @ORM\PrePersist
      */
     public function setCreatedAtValue()
     {
@@ -159,5 +159,4 @@ class Comment
 
         return $this;
     }
-
 }

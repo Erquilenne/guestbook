@@ -51,9 +51,9 @@ class Conference
         $this->comments = new ArrayCollection();
     }
 
-    public function __toString():string
+    public function __toString(): string
     {
-        return $this->city . ' ' . $this->year;
+        return $this->city.' '.$this->year;
     }
 
     public function getId(): ?int
@@ -63,7 +63,7 @@ class Conference
 
     public function computeSlug(SluggerInterface $slugger)
     {
-        if(!$this->slug || '-' === $this->slug) {
+        if (!$this->slug || '-' === $this->slug) {
             $this->slug = (string) $slugger->slug((string) $this)->lower();
         }
     }

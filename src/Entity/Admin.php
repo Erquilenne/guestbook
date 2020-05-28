@@ -55,11 +55,6 @@ class Admin implements UserInterface
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->username;
-    }
-
     /**
      * @see UserInterface
      */
@@ -77,6 +72,11 @@ class Admin implements UserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->username;
     }
 
     /**
