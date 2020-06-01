@@ -35,6 +35,7 @@ class SpamChecker
                 'blog_charset' => 'UTF-8',
                 'is_test' => true,
             ]),
+            'verify_peer' => false,
         ]);
 
         $headers = $response->getHeaders();
